@@ -18,7 +18,7 @@ module TelnetQ
   #   of these options.  Note that if the remote party sends DONT in response
   #   to our request, the option will remain disabled.
   # [:him]
-  #   The list of options we want the remote party should initially enable.
+  #   The list of options we want the remote party to initially enable.
   #   When the connection is established, the local party sends a DO request
   #   for each of these options.  Note that if the remote party sends WONT
   #   in response to our request, the option will remain disabled.
@@ -77,7 +77,7 @@ module TelnetQ
 
     # Ask the specified party enable this option.
     #
-    # party may be one of :us or :them.
+    # party may be one of :us or :him.
     def request(party, option)
       sm = state_machine(party, option)
       @supported_options[party] << option
@@ -87,7 +87,7 @@ module TelnetQ
 
     # Ask the specified party to disable this option.
     #
-    # party may be one of :us or :them.
+    # party may be one of :us or :him.
     def forbid(party, option)
       sm = state_machine(party, option)
       @supported_options[party].delete(option)
